@@ -1,7 +1,16 @@
 # student_data_bank
 
-This Ruby Gem provides a CLI to view the art exhibitions selected by [Artlyst](http://www.artlyst.com/whats-on/) that are taking place at the moment in London.
+This is a Content Management System for a nursery to keep the daily information about their students. This daily information will be referred to as activities.
 
+The app provides a database and web interface for users to:
+
+* Sign up, log in or log out securely as a nursery staff or parent. 
+* Nursery staff can create, read, update, and delete (CRUD) an activity.
+* Parents can read only the personal profile page of their children.
+* User inputs are validated for account and student creation.
+
+
+Student Data Bank was built with [Sinatra](http://sinatrarb.com/), extended with [Rake](https://github.com/ruby/rake) for working with an SQL database using [ActiveRecord ORM](https://github.com/rails/rails/tree/master/activerecord).
 ## Getting Started
 
 
@@ -13,24 +22,8 @@ Gems you need to install the software:
 ```
 $ sudo gem install bundler
 ```
-* nokogiri
 
-```
-$ sudo gem install nokogiri
-```
-* colorize
-
-```
-$ sudo gem install colorize
-```
-* artii
-
-```
-$ sudo gem install artii
-
-```
-
-Finally run the folowing code and automatically a file will be created or updated in your directory: Gemfile.lock with all the gems installed.
+After checking out the repository, run the following code and automatically a file will be created or updated in your directory: Gemfile.lock with all the gems installed.
 
 ```
 $ bundle install
@@ -38,9 +31,9 @@ $ bundle install
 
 ### Installation
 
-To install this gem onto your local machine:
+To install this app onto your local machine:
 
-* Clone with HTTPS this repository
+* Clone this repository with HTTPS
 * Open your terminal and change to the local directory where you want to clone your repository and run:
 
 ```
@@ -48,13 +41,45 @@ $ git clone + the link copied before.
 ```
 
 ### Usage
-Type the below on your terminal and follow the on screen prompts.
+You can start one of Rack's supported servers using the shotgun [shotgun](https://github.com/rtomayko/shotgun) command. 
 
 ```
-$ ruby bin/artify
+$ shotgun
 ```
+### Model Classes
+Student Data Bank database includes three model classes: User, Activity and Student.
+
+1. User: stores user attributes, including:
+* Username
+* Email
+* Password (Secured with Bcrypt hashing algorithm)
+* Nursery_staff, a boolean value to indicate if a user is a nursery staff
+
+2. Activity: stores activity attributes, including:
+* Date
+* Student_id, to associate activity to student
+* Breakfast
+* Morning Snacks
+* Lunch
+* Afternoon Snacks
+* Sleep
+* Nappies
+* Comments
+
+3. Student: stores student attributes, including:
+* Name
+* User_id, to associate Student to User
+* Key person
+* Room
+
+### Model Associations
+Activity belongs to a Student.
+Student has many activities and belongs to a User(parent).
+User(parent) has many students.
+
+
 ### Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/DianaBaRo/artify. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/DianaBaRo/student_data_bank. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
 
 ## Author
 
