@@ -7,7 +7,7 @@ The app provides a database and web interface for users to:
 * Sign up, log in or log out securely as a nursery staff or parent. 
 * Nursery staff can create, read, update, and delete (CRUD) an activity.
 * Parents can read only the personal profile page of their children.
-* User inputs are validated for account and student creation.
+* User inputs are validated for account creation.
 
 
 Student Data Bank was built with [Sinatra](http://sinatrarb.com/), extended with [Rake](https://github.com/ruby/rake) for working with an SQL database using [ActiveRecord ORM](https://github.com/rails/rails/tree/master/activerecord).
@@ -41,7 +41,7 @@ $ git clone + the link copied before.
 ```
 
 ### Usage
-You can start one of Rack's supported servers using the shotgun [shotgun](https://github.com/rtomayko/shotgun) command. 
+You can start one of Rack's supported servers using the [shotgun](https://github.com/rtomayko/shotgun) command. 
 
 ```
 $ shotgun
@@ -57,7 +57,7 @@ Student Data Bank database includes three model classes: User, Activity and Stud
 
 2. Activity: stores activity attributes, including:
 * Date
-* Student_id, to associate activity to student
+* Student_id, to associate Activity to Student
 * Breakfast
 * Morning Snacks
 * Lunch
@@ -73,9 +73,9 @@ Student Data Bank database includes three model classes: User, Activity and Stud
 * Room
 
 ### Model Associations
+User (parent) has many students.
+Student has many activities and belongs to a User (parent).
 Activity belongs to a Student.
-Student has many activities and belongs to a User(parent).
-User(parent) has many students.
 
 
 ### Contributing
