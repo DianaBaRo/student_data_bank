@@ -1,3 +1,5 @@
 class Student < ActiveRecord::Base
-    belongs_to :room
+  validates :name, presence: true
+  belongs_to :user
+  has_many :activities
 end
