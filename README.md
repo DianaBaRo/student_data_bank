@@ -23,12 +23,6 @@ Gems you need to install the software:
 $ sudo gem install bundler
 ```
 
-After checking out the repository, run the following code and automatically a file will be created or updated in your directory: Gemfile.lock with all the gems installed.
-
-```
-$ bundle install
-```
-
 ### Installation
 
 To install this app onto your local machine:
@@ -38,6 +32,18 @@ To install this app onto your local machine:
 
 ```
 $ git clone + the link copied before.
+```
+
+After checking out the repository, run the following code and automatically a file will be created or updated in your directory: Gemfile.lock with all the gems installed.
+
+```
+$ bundle install
+```
+
+And finally run:
+
+```
+$ rake db:migrate
 ```
 
 ### Usage
