@@ -63,6 +63,7 @@ Student Data Bank database includes three model classes: User, Activity and Stud
 
 2. Activity: stores activity attributes, including:
 * Date
+* User_id, to associate Activity to User
 * Student_id, to associate Activity to Student
 * Breakfast
 * Morning Snacks
@@ -79,9 +80,9 @@ Student Data Bank database includes three model classes: User, Activity and Stud
 * Room
 
 ### Model Associations
-User (parent) has many students.
+User (parent) has many students and User as nursery_staff has many activities.
 Student has many activities and belongs to a User (parent).
-Activity belongs to a Student.
+Activity belongs to a Student and belongs to User.
 
 
 ### Contributing
