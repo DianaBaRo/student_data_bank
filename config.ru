@@ -1,4 +1,4 @@
-require_relative './config/environment'
+require './config/environment'
 
 =begin
 if ActiveRecord::Migrator.needs_migration?
