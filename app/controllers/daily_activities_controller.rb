@@ -1,0 +1,3 @@
+class DailyActivitiesController < ApplicationController
+
+end
