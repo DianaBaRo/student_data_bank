@@ -1,0 +1,25 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<% if @user.nursery_staff %>
+  <h2>Your students:</h2>
+  <% @user.students.each do |student| %>
+    <h2><a href="/students/#{student.id}"><%= student.name %></a></h2>
+  <% end %>
+
+  <h2><a href="/students/new">Create a new student </a></h2>
+
+  <h2>Your activities:</h2>
+  <% @user.activities.each do |activity| %>
+    <h2><a href="/activities/#{activity.id}"><%= activity.date %></a></h2>
+  <% end %>
+
+  <h2><a href="/activities/new">Create a new activity </a></h2>
+  
+<% else %>
+  <% @user.students.each do |student| %>
+    <h2><a href="/students/#{student.id}"><%= student.name %></a></h2>
+  <% end %>
+<% end %>
+
+
+<p><a href="/logout">Log Out</a></p>

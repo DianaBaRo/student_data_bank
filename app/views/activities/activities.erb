@@ -1,0 +1,7 @@
+<p> Find below the activities you have created: </p>
+<% @user.activities.each do |activity| %>
+  <h2><a href="/activities/:id"><%= activity.date %></h2>
+<% end %>
+
+<p><a href="/users/:slug">Your profile</a></p>
+<p><a href="/logout">Log Out</a></p>

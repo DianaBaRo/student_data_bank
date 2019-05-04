@@ -1,0 +1,20 @@
+<form method="POST" action="/activities">
+  <h1>New Activity</h1>
+  <p><label for="date">Date:</label>
+  <input type="text" id="date" name="date" /></p>
+  <p><label for="content">Content:</label>
+  <input type="text" id="content" name="content" /></p>
+  <input type="submit" id ="submit" value="Submit" />
+
+</form>
+
+ t.string  "date"
+    t.integer "user_id"
+    t.integer "student_id"
+    t.string  "breakfast"
+    t.string  "morning_snacks"
+    t.string  "lunch"
+    t.string  "afternoon_snacks"
+    t.string  "sleep"
+    t.string  "nappies"
+    t.text    "comments"

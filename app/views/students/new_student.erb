@@ -1,0 +1,13 @@
+<h1>Create a new student</h1>
+
+<form action="/students" method="POST">
+  <input type="text" id="name" name="name" placeholder="Name:" required/>
+  <input type="text" id="key_person" name="key_person" placeholder="Key person:" required/>
+  <input type="text" id="room" name="room" placeholder="Room:" required/>
+  <h3>Parents</h3>
+  <% User.all.each do |parent| %>
+    <label><input id="<%= parent.username %>" type="radio" name="parents[]" value="<%= parent.id %>" /><%= parent.username %></label>
+  <% end %>
+
+  <input type="submit" id="submit" value="Create">
+</form>
