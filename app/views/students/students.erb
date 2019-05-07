@@ -1,0 +1,18 @@
+<h1>Welcome, <%= current_user.username %></h1>
+
+<% if current_user.nursery_staff %>
+  <h2>All our students:</h2>
+  <% Student.all.each do |student| %>
+    <h2><a href="/students/<%=student.id%>"><%=student.name%></a></h2>
+  <% end %>
+
+  <h2><a href="/students/new">Create a new student </a></h2>
+  
+<% else %>
+  <% current_user.students.each do |student| %>
+    <h2><a href="/students/<%=student.id%>"><%=student.name%></a></h2>
+  <% end %>
+<% end %>
+
+
+<p><a href="/logout">Log Out</a></p>

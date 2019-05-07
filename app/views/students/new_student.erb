@@ -4,9 +4,9 @@
   <input type="text" id="name" name="name" placeholder="Name:" required/>
   <input type="text" id="key_person" name="key_person" placeholder="Key person:" required/>
   <input type="text" id="room" name="room" placeholder="Room:" required/>
-  <h3>Parents</h3>
-  <% User.all.each do |parent| %>
-    <label><input id="<%= parent.username %>" type="radio" name="parents[]" value="<%= parent.id %>" /><%= parent.username %></label>
+  <p><label for="user_id">Parent:</label>
+  <% User.all.each do |user| %>
+    <input type="radio" id="user_id" name="user_id" value="<%= user.id %>"/><%= user.username %></p>
   <% end %>
 
   <input type="submit" id="submit" value="Create">

@@ -1,20 +1,35 @@
 <form method="POST" action="/activities">
   <h1>New Activity</h1>
   <p><label for="date">Date:</label>
-  <input type="text" id="date" name="date" /></p>
-  <p><label for="content">Content:</label>
-  <input type="text" id="content" name="content" /></p>
-  <input type="submit" id ="submit" value="Submit" />
+  <input type="text" id="date" name="date" required /></p>
+
+  <p><label for="student_id">Student:</label>
+  <% Student.all.each do |student| %>
+    <input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required /><%= student.name %></p>
+  <% end %>
+
+  <p><label for="breakfast">Breakfast:</label>
+  <input type="text" id="breakfast" name="breakfast" required /></p>
+
+  <p><label for="morning_snacks">Morning Snacks:</label>
+  <input type="text" id="morning_snacks" name="morning_snacks" required /></p>
+
+  <p><label for="lunch">Lunch:</label>
+  <input type="text" id="lunch" name="lunch" required /></p>
+
+  <p><label for="afternoon_snacks">Afternoon_snacks:</label>
+  <input type="text" id="afternoon_snacks" name="afternoon_snacks" required /></p>
+
+  <p><label for="sleep">Sleep:</label>
+  <input type="text" id="sleep" name="sleep" required /></p>
+
+  <p><label for="nappies">Nappies:</label>
+  <input type="text" id="nappies" name="nappies" required /></p>
+
+  <p><label for="comments">Comments:</label>
+  <input type="textarea" id="comments" name="comments" /></p>
+
+
+  <input type="submit" id ="submit" value="Create Activity" />
 
 </form>
-
- t.string  "date"
-    t.integer "user_id"
-    t.integer "student_id"
-    t.string  "breakfast"
-    t.string  "morning_snacks"
-    t.string  "lunch"
-    t.string  "afternoon_snacks"
-    t.string  "sleep"
-    t.string  "nappies"
-    t.text    "comments"

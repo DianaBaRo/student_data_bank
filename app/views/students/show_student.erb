@@ -1,1 +1,17 @@
-#Include all activities
+<h2>Student: <%= @student.name %></h2>
+<p>Parent: <%= @student.user.username %></p>
+<p>Key Person: <%= @student.key_person%></p>
+<p>Room: <%= @student.room %></p>
+<p><%= @student.name %> activities:</p>
+<% @student.activities.each do |activity| %>
+  <h2><a href="/activities/<%=activity.id%>"><%= activity.date %></a></h2>
+<% end %>
+  
+<% if current_user.nursery_staff == true %>
+  <form method="post" action="/students/<%= @student.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" id="submit" value="Delete Student">
+  </form>
+
+  <p><a href="/students/<%= @student.id %>/edit">Edit Student </a></p>
+<% end %>

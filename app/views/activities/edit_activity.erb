@@ -1,0 +1,37 @@
+<h2> Edit <%= @activity.date %> - <%= @activity.student.name %></h2>
+
+<form action="/activities/<%=@activity.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+  
+  <p><label for="date">Date:</label>
+  <input type="text" id="date" name="date" value="<%= @activity.date %>" required /></p>
+
+  <p><label for="student_id">Student:</label>
+  <% Student.all.each do |student| %>
+    <input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required/><%= student.name %></p>
+  <% end %>
+
+  <p><label for="breakfast">Breakfast:</label>
+  <input type="text" id="breakfast" name="breakfast" value="<%= @activity.breakfast %>" required /></p>
+
+  <p><label for="morning_snacks">Morning Snacks:</label>
+  <input type="text" id="morning_snacks" name="morning_snacks" value="<%= @activity.morning_snacks %>" required /></p>
+
+  <p><label for="lunch">Lunch:</label>
+  <input type="text" id="lunch" name="lunch" value="<%= @activity.lunch %>" required /></p>
+
+  <p><label for="afternoon_snacks">Afternoon_snacks:</label>
+  <input type="text" id="afternoon_snacks" name="afternoon_snacks" value="<%= @activity.afternoon_snacks %>" required /></p>
+
+  <p><label for="sleep">Sleep:</label>
+  <input type="text" id="sleep" name="sleep" value="<%= @activity.sleep %>" required /></p>
+
+  <p><label for="nappies">Nappies:</label>
+  <input type="text" id="nappies" name="nappies" value="<%= @activity.nappies %>" required /></p>
+
+  <p><label for="comments">Comments:</label>
+  <input type="textarea" id="comments" name="comments" value="<%= @activity.comments %>" required /></p>
+
+
+  <input type="submit" id ="submit" value="Edit Activity" />
+</form>
