@@ -3,15 +3,15 @@ class UsersController < ApplicationController
   #SignUp
   get '/signup' do
     if logged_in?
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{current_user.id}"
     else
       erb :'users/sign_up'
     end
   end
 
   post '/signup' do
-    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    @user.nursery_staff = params[:nursery_staff] == "yes" ? true : false
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+    @user.nursery_staff = params[:nursery_staff] == "yes"
     if @user.save
       session[:user_id] = @user.id
       redirect to "/users/#{@user.id}"
@@ -23,14 +23,13 @@ class UsersController < ApplicationController
   #Login
   get "/login" do
     if logged_in?
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{current_user.id}"
     else
       erb :'users/login'
     end
   end
 
   post "/login" do
-
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
@@ -56,10 +55,14 @@ class UsersController < ApplicationController
   get '/users/:id' do
     @user = User.find_by_id(params[:id])
 
-    if current_user == @user
-      erb :'users/show_user'
+    if logged_in?
+      if current_user == @user
+        erb :'users/show_user'
+      else
+        redirect to "/users/#{current_user.id}"
+      end
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
   

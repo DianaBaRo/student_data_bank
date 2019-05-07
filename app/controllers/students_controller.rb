@@ -2,8 +2,6 @@ class StudentsController < ApplicationController
   #Index
   get '/students' do
     if logged_in?
-      @students = Student.all
-
       erb :'students/students'
     else
       redirect to '/login'
@@ -13,7 +11,82 @@ class StudentsController < ApplicationController
   #Create
   get '/students/new' do
     if logged_in?
-      erb :'students/new_student'
+      if current_user.nursery_staff
+        erb :'students/new_student'
+      else
+        redirect to '/users/current_user.id'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/students' do
+    if logged_in?
+      if current_user.nursery_staff
+        @user = User.find_by_id(params[:user_id])
+        @student = @user.students.create(name: params[:name], user_id: params[:user_id], key_person: params[:key_person], room: params[:room])
+        if @student.save
+          redirect to "/students/#{@student.id}"
+        else
+          redirect to '/students/new'
+        end
+      else
+        redirect to '/users/current_user.id'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  #Show Student
+  get '/students/:id' do
+    @student = Student.find_by_id(params[:id])
+
+    if logged_in?
+      erb :'students/show_student'
+    else
+      redirect to '/login'
+    end
+  end
+
+  #Edit
+  get '/students/:id/edit' do
+    if logged_in?
+      if current_user.nursery_staff
+        @student = Student.find_by_id(params[:id])
+        erb :'students/edit_student'
+      else
+        redirect to '/users/current_user.id'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+ 
+  #Update
+  patch '/students/:id' do
+    if logged_in?
+      @student = Student.find_by_id(params[:id])
+      if @student.update(name: params[:name], user_id: params[:user_id], key_person: params[:key_person], room: params[:room])
+        redirect to "/students/#{@student.id}"
+      else
+        redirect to "/students/#{@student.id}/edit"
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  #Delete
+  delete '/students/:id/delete' do
+    if logged_in?
+      @student = Student.find_by_id(params[:id])
+      if @student && current_user.nursery_staff
+        @student.delete
+      else
+        redirect to '/users/current_user.id'
+      end
     else
       redirect to '/login'
     end
