@@ -1,5 +1,4 @@
 require_relative '../../config/environment'
-require 'securerandom'
 
 class ApplicationController < Sinatra::Base
 
@@ -7,8 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, 'super secret'
-    #ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+    set :session_secret, 'not very super secret'
   end
 
   get '/' do
