@@ -3,9 +3,9 @@
   <p><label for="date">Date:</label>
   <input type="text" id="date" name="date" required /></p>
 
-  <p><label for="student_id">Student:</label>
+  <p><label for="student_id">Choose an student:</label></p>
   <% Student.all.each do |student| %>
-    <input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required /><%= student.name %></p>
+    <p><input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required /><%= student.name %></p>
   <% end %>
 
   <p><label for="breakfast">Breakfast:</label>

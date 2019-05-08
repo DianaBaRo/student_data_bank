@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+
   #Index
   get '/students' do
     if logged_in?
@@ -43,8 +44,12 @@ class StudentsController < ApplicationController
   get '/students/:id' do
     @student = Student.find_by_id(params[:id])
 
-    if logged_in?
-      erb :'students/show_student'
+    if @student && logged_in?
+      if @student.user == current_user || current_user.nursery_staff
+        erb :'students/show_student'
+      else
+        redirect to 'users/current_user.id'
+      end
     else
       redirect to '/login'
     end
@@ -67,11 +72,15 @@ class StudentsController < ApplicationController
   #Update
   patch '/students/:id' do
     if logged_in?
-      @student = Student.find_by_id(params[:id])
-      if @student.update(name: params[:name], user_id: params[:user_id], key_person: params[:key_person], room: params[:room])
-        redirect to "/students/#{@student.id}"
+      if current_user.nursery_staff
+        @student = Student.find_by_id(params[:id])
+        if @student.update(name: params[:name], user_id: params[:user_id], key_person: params[:key_person], room: params[:room])
+          redirect to "/students/#{@student.id}"
+        else
+          redirect to "/students/#{@student.id}/edit"
+        end
       else
-        redirect to "/students/#{@student.id}/edit"
+        redirect to 'users/current_user.id'
       end
     else
       redirect to '/login'
@@ -84,8 +93,7 @@ class StudentsController < ApplicationController
       @student = Student.find_by_id(params[:id])
       if @student && current_user.nursery_staff
         @student.delete
-      else
-        redirect to '/users/current_user.id'
+        redirect to '/students'
       end
     else
       redirect to '/login'
