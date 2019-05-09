@@ -1,17 +1,33 @@
-<h2>Student: <%= @student.name %></h2>
-<p>Parent: <%= @student.user.username %></p>
-<p>Key Person: <%= @student.key_person%></p>
-<p>Room: <%= @student.room %></p>
-<p><%= @student.name %> activities:</p>
-<% @student.activities.each do |activity| %>
-  <h2><a href="/activities/<%=activity.id%>"><%= activity.date %></a></h2>
+<h2><%= @student.name %></h2>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item">Parent: <%= @student.user.username %></li>
+  <li class="list-group-item">Key Person: <%= @student.key_person%></li>
+  <li class="list-group-item">Room: <%= @student.room %></li>
+</ul>
+<h1></h1>
+<% if @student.activities.count > 0 %>
+  <h4><%= @student.name %> activities:</h4>
+  <div class="list-group">
+    <% @student.activities.each do |activity| %>
+      <a href="/activities/<%=activity.id%>" class="list-group-item list-group-item-action"><%= activity.date %></a>
+    <% end %>
+  </div>
+<% else %>
+  <h1></h1>
+  <h4><%= @student.name %> doesn't have any activity yet</h4>
 <% end %>
   
-<% if current_user.nursery_staff == true %>
-  <form method="post" action="/students/<%= @student.id%>/delete">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" id="submit" value="Delete Student">
-  </form>
-
-  <p><a href="/students/<%= @student.id %>/edit">Edit Student </a></p>
+<% if current_user.nursery_staff %>
+  <form action="/students/<%= @student.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <h1></h1>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" id="submit" class="btn btn-primary">Delete Student</button>
+       <a class="btn btn-primary" href="/students/<%= @student.id %>/edit" role="button">Edit student</a>
+    </div>
+  </div>
 <% end %>
+
+
+

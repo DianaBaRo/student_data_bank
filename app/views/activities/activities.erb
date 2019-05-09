@@ -1,9 +1,12 @@
-<h1>Welcome, <%= current_user.username %></h1>
+<h1>Find below all our activities, <%= current_user.username %></h1>
 
-<h2>All our activities:</h2>
-<% Activity.all.each do |activity| %>
-  <h2><a href="/activities/<%= activity.id %>"><%= activity.date %> </a></h2>
-<% end %>
-
-<p><a href="/users/<%= current_user.id %>">Your profile</a></p>
-<p><a href="/logout">Log Out</a></p>
+  <div class="list-group">
+    <% Activity.all.each do |activity| %>
+      <a href="/activities/<%=activity.id%>" class="list-group-item list-group-item-action"><%= activity.date %></a>
+    <% end %>
+  </div>
+  <h1></h1>
+  <div class="col-sm-12 text-center">
+    <a class="btn btn-primary btn-lg" href="/activities/new" role="button">Create a new activity</a>
+    <a class="btn btn-primary btn-lg" href="/logout" role="button">Log Out</a>
+  </div>

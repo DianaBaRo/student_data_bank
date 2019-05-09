@@ -1,19 +1,24 @@
 <h2><%= @activity.date %></h2>
-<h4><%= @activity.student.name %></h4>
-<p><%= @activity.breakfast%></p>
-<p><%= @activity.morning_snacks %></p>
-<p><%= @activity.lunch %></p>
-<p><%= @activity.afternoon_snacks %></p>
-<p><%= @activity.sleep %></p>
-<p><%= @activity.nappies %></p>
-<p><%= @activity.comments %></p>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Student name: <%= @activity.student.name %></li>
+  <li class="list-group-item">Breakfast: <%= @activity.breakfast%></li>
+  <li class="list-group-item">Morning snacks: <%= @activity.morning_snacks %></li>
+  <li class="list-group-item">Lunch: <%= @activity.lunch %></li>
+  <li class="list-group-item">Afternoon snacks: <%= @activity.afternoon_snacks %></li>
+  <li class="list-group-item">Sleep: <%= @activity.sleep %></li>
+  <li class="list-group-item">Nappies: <%= @activity.nappies %></li>
+  <li class="list-group-item">Comments: <%= @activity.comments %></li>
+</ul>
 
 <% if current_user.nursery_staff %>
+  <form action="/activities/<%= @activity.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <h1></h1>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" id="submit" class="btn btn-primary">Delete Activity</button>
+       <a class="btn btn-primary" href="/activities/<%= @activity.id %>/edit" role="button">Edit Activity</a>
+    </div>
+  </div>
 
-  <form method="post" action="/activities/<%= @activity.id%>/delete">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" id="submit" value="Delete Activity">
-  </form>
-
-  <p><a href="/activities/<%= @activity.id %>/edit">Edit Activity </a></p>
 <% end %>

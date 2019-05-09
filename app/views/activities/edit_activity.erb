@@ -1,37 +1,84 @@
-<h2> Edit <%= @activity.date %> - <%= @activity.student.name %></h2>
+<h2>Edit <%= @activity.date %></h2>
+<h1></h1>
+<form method="POST" action="/activities/<%=@activity.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-<form action="/activities/<%=@activity.id%>" method="POST">
-<input id="hidden" type="hidden" name="_method" value="PATCH">
-  
-  <p><label for="date">Date:</label>
-  <input type="text" id="date" name="date" value="<%= @activity.date %>" required /></p>
+  <div class="form-group row">
+    <label for="date" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <input type="text" id="date" name="date" value="<%= @activity.date %>" class="form-control" required>
+    </div>
+  </div>
+  <p>Choose a student:</p>
+  <fieldset class="form-group">
+    
+      <% Student.all.each do |student| %>
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="student_id" name="student_id" value="<%= student.id %>" required >
+              <label class="form-check-label" for="student_id">
+                <%= student.name %>
+              </label>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    
+  </fieldset>
 
-  <p><label for="student_id">Student:</label>
-  <% Student.all.each do |student| %>
-    <input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required/><%= student.name %></p>
-  <% end %>
+  <div class="form-group row">
+    <label for="breakfast" class="col-sm-2 col-form-label">Breakfast</label>
+    <div class="col-sm-10">
+      <input type="text" id="breakfast" name="breakfast" value="<%= @activity.breakfast %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="breakfast">Breakfast:</label>
-  <input type="text" id="breakfast" name="breakfast" value="<%= @activity.breakfast %>" required /></p>
+  <div class="form-group row">
+    <label for="morning_snacks" class="col-sm-2 col-form-label">Morning snacks</label>
+    <div class="col-sm-10">
+      <input type="text" id="morning_snacks" name="morning_snacks" value="<%= @activity.morning_snacks %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="morning_snacks">Morning Snacks:</label>
-  <input type="text" id="morning_snacks" name="morning_snacks" value="<%= @activity.morning_snacks %>" required /></p>
+  <div class="form-group row">
+    <label for="lunch" class="col-sm-2 col-form-label">Lunch</label>
+    <div class="col-sm-10">
+      <input type="text" id="lunch" name="lunch" value="<%= @activity.lunch %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="lunch">Lunch:</label>
-  <input type="text" id="lunch" name="lunch" value="<%= @activity.lunch %>" required /></p>
+  <div class="form-group row">
+    <label for="afternoon_snacks" class="col-sm-2 col-form-label">Afternoon snacks</label>
+    <div class="col-sm-10">
+      <input type="text" id="afternoon_snacks" name="afternoon_snacks" value="<%= @activity.afternoon_snacks %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="afternoon_snacks">Afternoon_snacks:</label>
-  <input type="text" id="afternoon_snacks" name="afternoon_snacks" value="<%= @activity.afternoon_snacks %>" required /></p>
+  <div class="form-group row">
+    <label for="sleep" class="col-sm-2 col-form-label">Sleep</label>
+    <div class="col-sm-10">
+      <input type="text" id="sleep" name="sleep" value="<%= @activity.sleep %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="sleep">Sleep:</label>
-  <input type="text" id="sleep" name="sleep" value="<%= @activity.sleep %>" required /></p>
+  <div class="form-group row">
+    <label for="nappies" class="col-sm-2 col-form-label">Nappies</label>
+    <div class="col-sm-10">
+      <input type="text" id="nappies" name="nappies" value="<%= @activity.nappies %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="nappies">Nappies:</label>
-  <input type="text" id="nappies" name="nappies" value="<%= @activity.nappies %>" required /></p>
+  <div class="form-group row">
+    <label for="comments" class="col-sm-2 col-form-label">Comments</label>
+    <div class="col-sm-10">
+      <input type="text" id="comments" name="comments" value="<%= @activity.comments %>" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="comments">Comments:</label>
-  <input type="textarea" id="comments" name="comments" value="<%= @activity.comments %>" required /></p>
-
-
-  <input type="submit" id ="submit" value="Edit Activity" />
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" id ="submit" class="btn btn-primary">Edit activity</button>
+    </div>
+  </div>
 </form>

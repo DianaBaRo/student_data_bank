@@ -1,17 +1,26 @@
-<h1>Welcome, <%= current_user.username %></h1>
-
 <% if current_user.nursery_staff %>
-  <h2>All our students:</h2>
-  <% Student.all.each do |student| %>
-    <h2><a href="/students/<%=student.id%>"><%=student.name%></a></h2>
-  <% end %>
+  <h1>Find below all our students, <%= current_user.username %></h1>
 
-  <h2><a href="/students/new">Create a new student </a></h2>
+  <div class="list-group">
+    <% Student.all.each do |student| %>
+      <a href="/students/<%=student.id%>" class="list-group-item list-group-item-action"><%=student.name%></a>
+    <% end %>
+  </div>
+  <h1></h1>
+  <div class="col-sm-12 text-center">
+    <a class="btn btn-primary btn-lg" href="/students/new" role="button">Create a new student</a>
+    <a class="btn btn-primary btn-lg" href="/logout" role="button">Log Out</a>
+  </div>
   
 <% else %>
-  <% current_user.students.each do |student| %>
-    <h2><a href="/students/<%=student.id%>"><%=student.name%></a></h2>
-  <% end %>
+  <h1>Find below the link/s to your kid/s profile/s, <%= current_user.username %></h1>
+  <div class="list-group">
+    <% current_user.students.each do |student| %>
+      <a href="/students/<%=student.id%>" class="list-group-item list-group-item-action"><%=student.name%></a>
+    <% end %>
+  </div>
+  <h1></h1>
+  <div class="col-sm-12 text-center">
+    <a class="btn btn-primary btn-lg" href="/logout" role="button">Log Out</a>
+  </div>
 <% end %>
-
-<p><a href="/logout">Log Out</a></p>

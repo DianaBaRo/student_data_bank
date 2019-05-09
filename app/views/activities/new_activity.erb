@@ -1,35 +1,82 @@
+<h1>New Activity</h1>
+<h1></h1>
 <form method="POST" action="/activities">
-  <h1>New Activity</h1>
-  <p><label for="date">Date:</label>
-  <input type="text" id="date" name="date" required /></p>
+  <div class="form-group row">
+    <label for="date" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <input type="text" id="date" name="date" class="form-control" required>
+    </div>
+  </div>
+  <p>Choose a student:</p>
+  <fieldset class="form-group">
+    
+      <% Student.all.each do |student| %>
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="student_id" name="student_id" value="<%= student.id %>" required >
+              <label class="form-check-label" for="student_id">
+                <%= student.name %>
+              </label>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    
+  </fieldset>
 
-  <p><label for="student_id">Choose an student:</label></p>
-  <% Student.all.each do |student| %>
-    <p><input type="radio" id="student_id" name="student_id" value="<%= student.id %>" required /><%= student.name %></p>
-  <% end %>
+  <div class="form-group row">
+    <label for="breakfast" class="col-sm-2 col-form-label">Breakfast</label>
+    <div class="col-sm-10">
+      <input type="text" id="breakfast" name="breakfast" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="breakfast">Breakfast:</label>
-  <input type="text" id="breakfast" name="breakfast" required /></p>
+  <div class="form-group row">
+    <label for="morning_snacks" class="col-sm-2 col-form-label">Morning snacks</label>
+    <div class="col-sm-10">
+      <input type="text" id="morning_snacks" name="morning_snacks" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="morning_snacks">Morning Snacks:</label>
-  <input type="text" id="morning_snacks" name="morning_snacks" required /></p>
+  <div class="form-group row">
+    <label for="lunch" class="col-sm-2 col-form-label">Lunch</label>
+    <div class="col-sm-10">
+      <input type="text" id="lunch" name="lunch" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="lunch">Lunch:</label>
-  <input type="text" id="lunch" name="lunch" required /></p>
+  <div class="form-group row">
+    <label for="afternoon_snacks" class="col-sm-2 col-form-label">Afternoon snacks</label>
+    <div class="col-sm-10">
+      <input type="text" id="afternoon_snacks" name="afternoon_snacks" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="afternoon_snacks">Afternoon_snacks:</label>
-  <input type="text" id="afternoon_snacks" name="afternoon_snacks" required /></p>
+  <div class="form-group row">
+    <label for="sleep" class="col-sm-2 col-form-label">Sleep</label>
+    <div class="col-sm-10">
+      <input type="text" id="sleep" name="sleep" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="sleep">Sleep:</label>
-  <input type="text" id="sleep" name="sleep" required /></p>
+  <div class="form-group row">
+    <label for="nappies" class="col-sm-2 col-form-label">Nappies</label>
+    <div class="col-sm-10">
+      <input type="text" id="nappies" name="nappies" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="nappies">Nappies:</label>
-  <input type="text" id="nappies" name="nappies" required /></p>
+  <div class="form-group row">
+    <label for="comments" class="col-sm-2 col-form-label">Comments</label>
+    <div class="col-sm-10">
+      <input type="text" id="comments" name="comments" class="form-control" required>
+    </div>
+  </div>
 
-  <p><label for="comments">Comments:</label>
-  <input type="textarea" id="comments" name="comments" /></p>
-
-
-  <input type="submit" id ="submit" value="Create Activity" />
-
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" id ="submit" class="btn btn-primary">Create activity</button>
+    </div>
+  </div>
 </form>

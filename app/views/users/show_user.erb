@@ -1,19 +1,32 @@
-<h1>Welcome, <%= @user.username %></h1>
+<div class="col-sm-12 text-left">
+  <h1>Welcome, <%= @user.username %></h1>
 
-<% if @user.nursery_staff %>
-  <h2><a href="/students"> All our students </a></h2>
+  <% if @user.nursery_staff %>
 
-  <h2><a href="/students/new">Create a new student </a></h2>
+    <div class="list-group">
+      <a href="/students" class="list-group-item list-group-item-action">All our students</a>
+      <a href="/students/new" class="list-group-item list-group-item-action">Create a new student</a>
+      <a href="/activities" class="list-group-item list-group-item-action">All our activities</a>
+      <a href="/activities/new" class="list-group-item list-group-item-action">Create a new activity</a>
+    </div>
+    
+  <% else %>
+    <h5>Check how was the day of your kid/s following the bellow link/s</h2>
+    <h6>*Please, let us know if you want any further information </h5>
 
-  <h2><a href="/activities"> All our activities </a></h2>
-
-  <h2><a href="/activities/new">Create a new activity </a></h2>
-  
-<% else %>
-  <% @user.students.each do |student| %>
-    <h2><a href="/students/<%=student.id%>"><%=student.name%></a></h2>
+    <% if @user.students.count > 0 %>
+      <ul class="list-group">
+      <% @user.students.each do |student| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="/students/<%=student.id%>"><%=student.name%> </a> <span class="badge badge-primary badge-pill"> <%=student.activities.count%> </span></li>
+      <% end %>
+      </ul>
+    <% else %>
+      <h1></h1>
+      <h4>Youd don't have any students yet</h4>
+    <% end %>
   <% end %>
-<% end %>
-
-
-<p><a href="/logout">Log Out</a></p>
+  <h1></h1>
+  <div class="col-sm-12 text-left">
+    <a class="btn btn-primary" href="/logout" role="button">Log Out</a>
+  </div>
+</div>
