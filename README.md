@@ -80,7 +80,7 @@ Student Data Bank database includes three model classes: User, Activity and Stud
 * Room
 
 ### Model Associations
-User (parent) has many students and User as nursery_staff has many activities.
+User has many students and has many activities.
 Student has many activities and belongs to a User (parent).
 Activity belongs to a Student and belongs to User.
 

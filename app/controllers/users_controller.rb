@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   #SignUp
   get '/signup' do
     if logged_in?
-      redirect to '/users/current_user.id'
+      @user = current_user
+      redirect to "/users/#{@user.id}"
     else
       erb :'users/sign_up'
     end
@@ -23,7 +24,8 @@ class UsersController < ApplicationController
   #Login
   get '/login' do
     if logged_in?
-      redirect to '/users/current_user.id'
+      @user = current_user
+      redirect to "/users/#{@user.id}"
     else
       erb :'users/login'
     end
@@ -53,14 +55,8 @@ class UsersController < ApplicationController
 
   #Show User
   get '/users/:id' do
-    @user = User.find_by_id(params[:id])
-
     if logged_in?
-      if current_user == @user
-        erb :'users/show_user'
-      else
-        erb :failure
-      end
+      erb :'users/show_user'
     else
       redirect to '/login'
     end

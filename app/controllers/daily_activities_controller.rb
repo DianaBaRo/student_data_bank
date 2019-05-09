@@ -1,12 +1,12 @@
 class DailyActivitiesController < ApplicationController
 
-#Index
-get '/activities' do
+  #Index
+  get '/activities' do
     if logged_in?
       if current_user.nursery_staff
         erb :'activities/activities'
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -19,7 +19,7 @@ get '/activities' do
       if current_user.nursery_staff
         erb :'activities/new_activity'
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -38,7 +38,7 @@ get '/activities' do
           redirect to '/activities/new'
         end
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -53,7 +53,7 @@ get '/activities' do
       if @activity.user == current_user || current_user.nursery_staff
         erb :'activities/show_activity'
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -67,7 +67,7 @@ get '/activities' do
         @activity = Activity.find_by_id(params[:id])
         erb :'activities/edit_activity'
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -87,7 +87,7 @@ get '/activities' do
           redirect to "/activities/#{@activity.id}/edit"
         end
       else
-        erb :failure
+        redirect to '/students'
       end
     else
       redirect to '/login'
@@ -102,7 +102,7 @@ get '/activities' do
         @activity.delete
         redirect to 'activities'
       else
-        redirect to 'activities'
+        redirect to '/students'
       end
     else
       redirect to '/login'
