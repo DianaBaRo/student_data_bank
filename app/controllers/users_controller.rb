@@ -59,7 +59,7 @@ class UsersController < ApplicationController
       if current_user == @user
         erb :'users/show_user'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'

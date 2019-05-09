@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
       if current_user.nursery_staff
         erb :'students/new_student'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -33,7 +33,7 @@ class StudentsController < ApplicationController
           redirect to '/students/new'
         end
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -48,7 +48,7 @@ class StudentsController < ApplicationController
       if @student.user == current_user || current_user.nursery_staff
         erb :'students/show_student'
       else
-        redirect to 'users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -62,7 +62,7 @@ class StudentsController < ApplicationController
         @student = Student.find_by_id(params[:id])
         erb :'students/edit_student'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -80,7 +80,7 @@ class StudentsController < ApplicationController
           redirect to "/students/#{@student.id}/edit"
         end
       else
-        redirect to 'users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -94,6 +94,8 @@ class StudentsController < ApplicationController
       if @student && current_user.nursery_staff
         @student.delete
         redirect to '/students'
+      else
+        edirect to '/students'
       end
     else
       redirect to '/login'

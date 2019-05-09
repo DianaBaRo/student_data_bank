@@ -6,7 +6,7 @@ get '/activities' do
       if current_user.nursery_staff
         erb :'activities/activities'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -19,7 +19,7 @@ get '/activities' do
       if current_user.nursery_staff
         erb :'activities/new_activity'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -38,7 +38,7 @@ get '/activities' do
           redirect to '/activities/new'
         end
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -53,7 +53,7 @@ get '/activities' do
       if @activity.user == current_user || current_user.nursery_staff
         erb :'activities/show_activity'
       else
-        redirect to 'users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -67,7 +67,7 @@ get '/activities' do
         @activity = Activity.find_by_id(params[:id])
         erb :'activities/edit_activity'
       else
-        redirect to '/users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -87,7 +87,7 @@ get '/activities' do
           redirect to "/activities/#{@activity.id}/edit"
         end
       else
-        redirect to 'users/current_user.id'
+        erb :failure
       end
     else
       redirect to '/login'
@@ -100,6 +100,8 @@ get '/activities' do
       @activity = Activity.find_by_id(params[:id])
       if @activity && current_user.nursery_staff
         @activity.delete
+        redirect to 'activities'
+      else
         redirect to 'activities'
       end
     else
