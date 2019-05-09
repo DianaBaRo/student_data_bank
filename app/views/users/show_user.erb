@@ -1,7 +1,7 @@
 <div class="col-sm-12 text-left">
-  <h1>Welcome, <%= @user.username %></h1>
+  <h1>Welcome, <%= current_user.username %></h1>
 
-  <% if @user.nursery_staff %>
+  <% if current_user.nursery_staff %>
 
     <div class="list-group">
       <a href="/students" class="list-group-item list-group-item-action">All our students</a>
@@ -14,9 +14,9 @@
     <h5>Check how was the day of your kid/s following the bellow link/s</h2>
     <h6>*Please, let us know if you want any further information </h5>
 
-    <% if @user.students.count > 0 %>
+    <% if current_user.students.count > 0 %>
       <ul class="list-group">
-      <% @user.students.each do |student| %>
+      <% current_user.students.each do |student| %>
         <li class="list-group-item d-flex justify-content-between align-items-center"><a href="/students/<%=student.id%>"><%=student.name%> </a> <span class="badge badge-primary badge-pill"> <%=student.activities.count%> </span></li>
       <% end %>
       </ul>
