@@ -1,7 +1,7 @@
-<h1>Find below all our activities, <%= current_user.username %></h1>
+<h1>Find below all your activities, <%= current_user.username %></h1>
 
   <div class="list-group">
-    <% Activity.all.each do |activity| %>
+    <% current_user.activities.each do |activity| %>
       <a href="/activities/<%=activity.id%>" class="list-group-item list-group-item-action"><%= activity.date %></a>
     <% end %>
   </div>
