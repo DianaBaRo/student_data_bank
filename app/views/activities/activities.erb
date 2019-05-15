@@ -1,11 +1,15 @@
 <h1>Find below all your activities, <%= current_user.username %></h1>
-
+<% if current_user.activities.count > 0 %>
   <div class="list-group">
     <% current_user.activities.each do |activity| %>
       <a href="/activities/<%=activity.id%>" class="list-group-item list-group-item-action"><%= activity.date %></a>
     <% end %>
   </div>
+<% else %>
   <h1></h1>
+  <h4>You don't have any activity</h4>
+<% end %>
+<h1></h1>
   <div class="col-sm-12 text-center">
     <a class="btn btn-primary btn-lg" href="/activities/new" role="button">Create a new activity</a>
     <a class="btn btn-primary btn-lg" href="/logout" role="button">Log Out</a>
