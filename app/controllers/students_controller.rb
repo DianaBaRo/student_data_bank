@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
     if logged_in?
       if current_user.nursery_staff
         @user = User.find_by_id(params[:user_id])
-        @student = @user.students.create(name: params[:name], user_id: params[:user_id], key_person: params[:key_person], room: params[:room])
+        @student = @user.students.create(name: params[:name], key_person: params[:key_person], room: params[:room])
         if @student.save
           redirect to "/students/#{@student.id}"
         else
