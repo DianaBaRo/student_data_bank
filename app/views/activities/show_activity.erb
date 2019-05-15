@@ -1,6 +1,7 @@
 <h2><%= @activity.date %></h2>
 <ul class="list-group list-group-flush">
   <li class="list-group-item">Student name: <%= @activity.student.name %></li>
+  <li class="list-group-item">Student parent: <%= @activity.student.user.username %></li>
   <li class="list-group-item">Breakfast: <%= @activity.breakfast%></li>
   <li class="list-group-item">Morning snacks: <%= @activity.morning_snacks %></li>
   <li class="list-group-item">Lunch: <%= @activity.lunch %></li>
@@ -8,9 +9,10 @@
   <li class="list-group-item">Sleep: <%= @activity.sleep %></li>
   <li class="list-group-item">Nappies: <%= @activity.nappies %></li>
   <li class="list-group-item">Comments: <%= @activity.comments %></li>
+  <li class="list-group-item">Activity created by: <%= @activity.user.username %></li>
 </ul>
 
-<% if current_user.nursery_staff %>
+<% if current_user == @activity.user %>
   <form action="/activities/<%= @activity.id%>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <h1></h1>
