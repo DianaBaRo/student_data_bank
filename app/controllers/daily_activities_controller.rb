@@ -30,8 +30,8 @@ class DailyActivitiesController < ApplicationController
     if logged_in?
       if current_user.nursery_staff
         @student = Student.find_by_id(params[:student_id])
-        @activity = @student.activities.create(date: params[:date], student_id: params[:student_id], breakfast: params[:breakfast], morning_snacks: params[:morning_snacks], lunch: params[:lunch], afternoon_snacks: params[:afternoon_snacks], sleep: params[:sleep], nappies: params[:nappies], comments: params[:comments])
-        @activity.user = @student.user
+        @activity = @student.activities.create(date: params[:date], breakfast: params[:breakfast], morning_snacks: params[:morning_snacks], lunch: params[:lunch], afternoon_snacks: params[:afternoon_snacks], sleep: params[:sleep], nappies: params[:nappies], comments: params[:comments])
+        @activity.user = current_user
         if @activity.save
           redirect to "/activities/#{@activity.id}"
         else
@@ -50,7 +50,7 @@ class DailyActivitiesController < ApplicationController
     @activity = Activity.find_by_id(params[:id])
 
     if @activity && logged_in?
-      if @activity.user == current_user || current_user.nursery_staff
+      if @activity.student.user == current_user || current_user.nursery_staff
         erb :'activities/show_activity'
       else
         redirect to '/students'
@@ -63,8 +63,8 @@ class DailyActivitiesController < ApplicationController
   #Edit
   get '/activities/:id/edit' do
     if logged_in?
-      if current_user.nursery_staff
-        @activity = Activity.find_by_id(params[:id])
+      @activity = Activity.find_by_id(params[:id])
+      if current_user.nursery_staff && @activity.user == current_user
         erb :'activities/edit_activity'
       else
         redirect to '/students'
@@ -77,11 +77,9 @@ class DailyActivitiesController < ApplicationController
   #Update
   patch '/activities/:id' do
     if logged_in?
-      if current_user.nursery_staff
-        @student = Student.find_by_id(params[:student_id])
-        @activity = Activity.find_by_id(params[:id])
+      @activity = Activity.find_by_id(params[:id])
+      if current_user.nursery_staff && @activity.user == current_user
         if @activity.update(date: params[:date], student_id: params[:student_id], breakfast: params[:breakfast], morning_snacks: params[:morning_snacks], lunch: params[:lunch], afternoon_snacks: params[:afternoon_snacks], sleep: params[:sleep], nappies: params[:nappies], comments: params[:comments])
-          @activity.user = @student.user
           redirect to "/activities/#{@activity.id}"
         else
           redirect to "/activities/#{@activity.id}/edit"
@@ -98,7 +96,7 @@ class DailyActivitiesController < ApplicationController
   delete '/activities/:id/delete' do
     if logged_in?
       @activity = Activity.find_by_id(params[:id])
-      if @activity && current_user.nursery_staff
+      if @activity && current_user.nursery_staff && @activity.user == current_user
         @activity.delete
         redirect to 'activities'
       else
