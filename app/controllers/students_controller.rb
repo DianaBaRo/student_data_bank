@@ -2,11 +2,13 @@ class StudentsController < ApplicationController
 
   #Index
   get '/students' do
-    if logged_in?
-      erb :'students/students'
+    redirect_if_not_loggedin
+    if current_user.nursery_staff
+      @students = Student.all
     else
-      redirect to '/login'
+      @students = current_user.students
     end
+    erb :'students/students'
   end
 
   #Create
