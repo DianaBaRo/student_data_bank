@@ -11,6 +11,9 @@ The app provides a database and web interface for users to:
 
 
 Student Data Bank was built with [Sinatra](http://sinatrarb.com/), extended with [Rake](https://github.com/ruby/rake) for working with an SQL database using [ActiveRecord ORM](https://github.com/rails/rails/tree/master/activerecord).
+
+Link to my [blog post](http://carolinabadas.com/sinatra-portfolio-project/).
+
 ## Getting Started
 
 
